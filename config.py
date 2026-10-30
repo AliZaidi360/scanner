@@ -53,7 +53,7 @@ WEIGHTS = {
         "New York": 2,
         "California": 1,
         "Texas": 1,
-        "Illinois": 1,
+        "Illinois": 2,
     }
 }
 

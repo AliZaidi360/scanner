@@ -29,7 +29,7 @@ EXCLUDED_TITLE_KEYWORDS = [
     "lead", "manager", "director", "architect", "vp"
 ]
 MAX_YEARS_EXPERIENCE = 3
-EXCLUDE_CLEARANCE = False
+EXCLUDE_CLEARANCE = True
 
 WEIGHTS = {
     "title_strong_match": 10,

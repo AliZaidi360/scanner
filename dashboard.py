@@ -6,10 +6,10 @@ import db
 import config
 import main
 
-st.set_page_config(page_title="DevOps & Cloud Job Scanner", layout="wide")
+st.set_page_config(page_title="Job Scanner", layout="wide")
 db.init_db()
 
-st.title("🚀 Junior DevOps & Cloud Job Scanner")
+st.title("🚀Job Scanner")
 
 # 1. Sidebar Filters & Admin Controls (Rendered first so you can always fetch!)
 st.sidebar.header("Filter Jobs")

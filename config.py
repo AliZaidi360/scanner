@@ -32,7 +32,7 @@ REQUEST_DELAY_SECONDS = 1.0
 
 SALARY_FLOOR = 70000
 EXCLUDED_TITLE_KEYWORDS = [
-    "Clearence","clearence","Senior""senior", "sr.", "sr ", "staff", "principal",
+    "Clearence","with clearence","Senior""senior", "sr.", "sr ", "staff", "principal",
     "lead", "manager", "director", "architect", "vp"
 ]
 MAX_YEARS_EXPERIENCE = 3

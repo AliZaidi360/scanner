@@ -8,7 +8,8 @@
     "platform engineer",
     "junior site reliability engineer",
     "associate cloud engineer",
-    "Data Analyst"
+    "Data Analyst",
+     "Internship"
 ]
 
 STATES = [

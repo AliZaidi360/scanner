@@ -6,16 +6,25 @@ import db
 import config
 import main
 
-st.set_page_config(page_title="Job Scanner", layout="wide")
+st.set_page_config(page_title="DevOps & Cloud Job Scanner", layout="wide")
 db.init_db()
 
-st.title("🚀Job Scanner")
+st.title("🚀 Junior DevOps & Cloud Job Scanner")
 
-# 1. Sidebar Filters & Admin Controls (Rendered first so you can always fetch!)
+# 1. Sidebar Filters & Admin Controls
 st.sidebar.header("Filter Jobs")
 selected_states = st.sidebar.multiselect("State", options=config.STATES, default=config.STATES)
-min_sal_filter = st.sidebar.number_input("Minimum Listed Salary ($)", value=config.SALARY_FLOOR, step=5000)
+
+min_sal_filter, max_sal_filter = st.sidebar.slider(
+    "Salary Scale ($)",
+    min_value=40000,
+    max_value=300000,
+    value=(config.SALARY_FLOOR, 180000),
+    step=5000,
+    format="$%d",
+)
 include_unknown_sal = st.sidebar.checkbox("Include 'Salary Unknown'", value=True)
+
 max_age_days = st.sidebar.slider("Posted Within (Days)", 1, 30, 14)
 status_options = ["new", "interested", "applied", "interview", "rejected", "ignored"]
 selected_statuses = st.sidebar.multiselect(
@@ -67,12 +76,17 @@ col4.metric("Interviews", int((df["status"] == "interview").sum()))
 # 5. Apply Sidebar Filters to DataFrame
 filtered_df = df[df["state"].isin(selected_states) & df["status"].isin(selected_statuses)].copy()
 
-if not include_unknown_sal:
-    filtered_df = filtered_df[filtered_df["salary_flag"] != "salary unknown"]
+job_low = filtered_df["salary_min"].fillna(filtered_df["salary_max"])
+job_high = filtered_df["salary_max"].fillna(filtered_df["salary_min"])
+in_salary_range = (job_high >= min_sal_filter) & (job_low <= max_sal_filter)
+
+if include_unknown_sal:
+    filtered_df = filtered_df[
+        (filtered_df["salary_flag"] == "salary unknown") | in_salary_range
+    ]
 else:
     filtered_df = filtered_df[
-        (filtered_df["salary_flag"] == "salary unknown") |
-        (filtered_df["salary_max"].fillna(filtered_df["salary_min"]).fillna(0) >= min_sal_filter)
+        (filtered_df["salary_flag"] != "salary unknown") & in_salary_range
     ]
 
 cutoff_date = (now_utc - timedelta(days=max_age_days)).isoformat()

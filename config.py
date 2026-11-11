@@ -1,15 +1,20 @@
 ﻿SEARCH_TERMS = [
-    "junior devops engineer",
+    "Junior devops engineer",
+    "Devops engineering Intern",
+    "Devops engineer internship",
+    "cloud engineering intern",
     "System Administrator",
     "IT specialist",
-    "Associate",
+    "Associate Engineer",
     "cloud engineer",
     "infrastructure engineer",
+    "Associate infrastructure engineer",
     "platform engineer",
     "junior site reliability engineer",
     "associate cloud engineer",
     "Data Analyst",
-     "Internship"
+    "Associate Data Analyst",
+    "Data analyst internship"
 ]
 
 STATES = [
